@@ -1,0 +1,1 @@
+APIs (Application Programming Interfaces) enable software systems to communicate. REST APIs use HTTP methods and are widely adopted. GraphQL by Meta allows clients to request specific data. gRPC by Google uses Protocol Buffers for efficient communication. API versioning and documentation are best practices.

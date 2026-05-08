@@ -1,0 +1,1 @@
+Quantum mechanics describes physics at the atomic and subatomic scale. The Heisenberg Uncertainty Principle states you cannot simultaneously know a particle's exact position and momentum. Schrödinger's equation describes how quantum states evolve over time. Quantum entanglement connects particles regardless of distance.

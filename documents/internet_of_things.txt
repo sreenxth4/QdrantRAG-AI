@@ -1,0 +1,1 @@
+The Internet of Things (IoT) connects everyday devices to the internet. Smart homes use IoT for lighting, thermostats, and security. Industrial IoT improves manufacturing efficiency. By 2025, there are over 75 billion connected IoT devices worldwide. Challenges include security, privacy, and interoperability.

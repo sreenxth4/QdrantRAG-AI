@@ -1,0 +1,1 @@
+Embeddings are dense vector representations of data that capture semantic meaning. Word2Vec and GloVe were early word embedding methods. Modern sentence embeddings from models like BERT capture contextual meaning. Cosine similarity measures how similar two embedding vectors are.

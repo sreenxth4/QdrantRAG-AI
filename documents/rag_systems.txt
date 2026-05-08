@@ -1,0 +1,1 @@
+Retrieval-Augmented Generation (RAG) combines information retrieval with language model generation. Documents are chunked, embedded, and stored in vector databases. When a user asks a question, relevant chunks are retrieved and provided as context to the LLM. RAG reduces hallucinations and provides source citations.

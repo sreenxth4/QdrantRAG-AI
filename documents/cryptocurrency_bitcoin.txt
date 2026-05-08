@@ -1,0 +1,1 @@
+Bitcoin is the first decentralized cryptocurrency, created in 2009 by the pseudonymous Satoshi Nakamoto. It uses blockchain technology for peer-to-peer transactions. Bitcoin mining requires solving complex mathematical problems. The maximum supply is capped at 21 million coins. El Salvador adopted Bitcoin as legal tender in 2021.

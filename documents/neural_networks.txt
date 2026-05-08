@@ -1,0 +1,1 @@
+Neural networks are computing systems inspired by biological neural networks in the brain. They consist of layers of interconnected nodes called neurons. Convolutional Neural Networks (CNNs) excel at image recognition. Recurrent Neural Networks (RNNs) are designed for sequential data like text and speech.

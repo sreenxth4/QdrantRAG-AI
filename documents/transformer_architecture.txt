@@ -1,0 +1,1 @@
+The Transformer architecture uses self-attention mechanisms to process sequential data in parallel. It was introduced in the 2017 paper 'Attention Is All You Need' by Vaswani et al. Transformers replaced RNNs as the dominant architecture for NLP. Key components include multi-head attention, positional encoding, and feed-forward layers.

@@ -1,0 +1,1 @@
+Vector databases store and search high-dimensional vectors efficiently. Qdrant, Pinecone, Weaviate, and Milvus are popular vector databases. They use approximate nearest neighbor (ANN) algorithms like HNSW for fast similarity search. Vector databases are essential for RAG systems and semantic search.

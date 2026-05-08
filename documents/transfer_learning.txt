@@ -1,0 +1,1 @@
+Transfer learning applies knowledge from one task to improve performance on another. Pre-trained models like BERT, ResNet, and GPT can be fine-tuned for specific tasks. This approach significantly reduces training time and data requirements. It is widely used in both NLP and computer vision.

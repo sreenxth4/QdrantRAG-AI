@@ -1,0 +1,1 @@
+Microservices architecture breaks applications into small, independent services. Each service handles a specific business function. Services communicate via APIs or message queues. Benefits include scalability, technology flexibility, and independent deployment. Netflix, Amazon, and Uber use microservices architecture.

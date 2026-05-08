@@ -1,0 +1,1 @@
+Google was founded by Larry Page and Sergey Brin in 1998 at Stanford University. It processes over 8.5 billion searches per day. Google's parent company Alphabet was created in 2015. Products include Gmail, YouTube, Android, and Google Cloud. Google developed the TensorFlow machine learning framework and the Gemini AI model.

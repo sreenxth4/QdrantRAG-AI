@@ -1,0 +1,1 @@
+Cybersecurity protects systems and data from digital attacks. Common threats include phishing, ransomware, and DDoS attacks. Zero-trust security assumes no user or system is trustworthy by default. Multi-factor authentication adds extra security layers. The global cybersecurity market exceeds $200 billion.

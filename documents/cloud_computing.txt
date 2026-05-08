@@ -1,0 +1,1 @@
+Cloud computing delivers computing services over the internet. Amazon Web Services (AWS) launched in 2006 and leads the market. Microsoft Azure and Google Cloud Platform are major competitors. Cloud services include IaaS, PaaS, and SaaS models. Serverless computing eliminates server management.

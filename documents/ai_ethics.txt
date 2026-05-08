@@ -1,0 +1,1 @@
+AI ethics addresses fairness, accountability, transparency, and privacy in artificial intelligence systems. Bias in training data can lead to discriminatory outcomes. The EU AI Act is the first comprehensive AI regulation. Responsible AI development requires diverse teams and rigorous testing.

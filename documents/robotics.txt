@@ -1,0 +1,1 @@
+Robotics combines engineering, computer science, and AI to build machines that perform tasks. Industrial robots automate manufacturing. Boston Dynamics develops advanced bipedal and quadrupedal robots. Surgical robots like da Vinci assist in minimally invasive procedures. Collaborative robots (cobots) work alongside humans safely.

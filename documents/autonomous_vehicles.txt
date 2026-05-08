@@ -1,0 +1,1 @@
+Autonomous vehicles use sensors, AI, and machine learning to navigate without human input. SAE defines six levels of automation from Level 0 to Level 5. Waymo by Alphabet operates commercial self-driving taxis. LiDAR, radar, and cameras provide environmental perception. Regulatory frameworks are still developing worldwide.

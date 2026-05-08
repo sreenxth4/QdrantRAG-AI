@@ -1,0 +1,1 @@
+Data engineering builds systems to collect, store, and process data at scale. ETL (Extract, Transform, Load) pipelines move data between systems. Apache Spark processes large datasets in parallel. Apache Kafka handles real-time data streaming. Data warehouses like Snowflake and BigQuery store analytical data.

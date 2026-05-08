@@ -1,0 +1,1 @@
+Linux is an open-source operating system created by Linus Torvalds in 1991. It powers most web servers, supercomputers, and Android devices. Popular distributions include Ubuntu, CentOS, and Debian. The Linux kernel is written in C. Linux uses a monolithic kernel architecture.

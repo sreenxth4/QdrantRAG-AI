@@ -1,0 +1,1 @@
+Generative AI creates new content including text, images, music, and code. DALL-E by OpenAI generates images from text descriptions. Stable Diffusion is an open-source image generation model. Midjourney produces artistic images. GitHub Copilot assists programmers by generating code suggestions.

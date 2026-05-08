@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RAG Chatbot powered by Qdrant and Google Gemini - Ask questions about uploaded documents">
+    <title>RAG Chatbot | Qdrant + Gemini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1>RAG Chatbot</h1>
+                    <p class="subtitle">Powered by Qdrant Cloud + Google Gemini</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="stats-panel" id="statsPanel">
+                    <div class="stat-item">
+                        <span class="stat-label">Documents</span>
+                        <span class="stat-value" id="docCount">—</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-label">Vectors</span>
+                        <span class="stat-value" id="vecCount">—</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-label">Status</span>
+                        <span class="stat-value status-badge" id="dbStatus">—</span>
+                    </div>
+                </div>
+                <button class="btn-reindex" id="btnReindex" title="Re-index all documents">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    <span>Reindex</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat area -->
+        <main class="chat-area" id="chatArea">
+            <div class="welcome-message" id="welcomeMsg">
+                <div class="welcome-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                </div>
+                <h2>Ask me anything about the documents</h2>
+                <p>I have access to 100 documents covering AI, technology, science, history, and more. Ask a question and I'll find relevant information.</p>
+                <div class="sample-questions">
+                    <button class="sample-q" onclick="askSample(this)">Which company created the AI model that processes text and images?</button>
+                    <button class="sample-q" onclick="askSample(this)">What technology replaced RNNs in language processing?</button>
+                    <button class="sample-q" onclick="askSample(this)">Which databases store high-dimensional vectors for search?</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input area -->
+        <footer class="input-area">
+            <div class="input-wrapper">
+                <textarea id="userInput" placeholder="Ask a question about the documents..." rows="1" autofocus></textarea>
+                <button class="btn-send" id="btnSend" title="Send question">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <p class="input-hint">RAG retrieves relevant document chunks and generates answers using Gemini</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

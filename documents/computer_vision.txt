@@ -1,0 +1,1 @@
+Computer vision enables machines to interpret visual information from the world. Applications include facial recognition, autonomous driving, and medical imaging. YOLO (You Only Look Once) is a popular real-time object detection algorithm. ImageNet is a benchmark dataset with over 14 million labeled images.

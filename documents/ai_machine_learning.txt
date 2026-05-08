@@ -1,0 +1,1 @@
+Machine learning is a subset of artificial intelligence that enables systems to learn from data. Supervised learning uses labeled data, while unsupervised learning finds patterns in unlabeled data. Deep learning uses neural networks with multiple layers. Popular frameworks include TensorFlow by Google and PyTorch by Meta.

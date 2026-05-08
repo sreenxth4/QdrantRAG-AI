@@ -1,0 +1,1 @@
+JavaScript is the language of the web, created by Brendan Eich in 1995. Node.js enables server-side JavaScript. React by Meta, Angular by Google, and Vue.js are popular frontend frameworks. TypeScript adds static typing to JavaScript. npm is the world's largest software registry.

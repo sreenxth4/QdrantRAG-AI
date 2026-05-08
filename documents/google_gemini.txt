@@ -1,0 +1,1 @@
+Gemini is a multimodal AI model developed by Google DeepMind. It can process text, images, audio, and video simultaneously. Gemini comes in three sizes: Ultra, Pro, and Nano. It was announced in December 2023 and represents Google's most capable AI model, competing directly with OpenAI's GPT-4.

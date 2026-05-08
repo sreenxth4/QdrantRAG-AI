@@ -1,0 +1,1 @@
+Reinforcement learning trains agents to make decisions by rewarding desired behaviors. DeepMind's AlphaGo defeated world champion Go player Lee Sedol in 2016. Q-learning and policy gradient methods are fundamental RL algorithms. Applications include robotics, game playing, and resource management.

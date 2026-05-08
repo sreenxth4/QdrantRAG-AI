@@ -1,0 +1,1 @@
+Natural Language Processing (NLP) enables computers to understand human language. Key tasks include sentiment analysis, named entity recognition, and machine translation. Transformers revolutionized NLP in 2017 with the 'Attention Is All You Need' paper by Google researchers. BERT and GPT are transformer-based models.

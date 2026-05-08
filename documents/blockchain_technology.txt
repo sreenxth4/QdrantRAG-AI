@@ -1,0 +1,1 @@
+Blockchain is a distributed ledger technology that records transactions across multiple computers. Bitcoin, created by Satoshi Nakamoto in 2009, was the first blockchain application. Ethereum introduced smart contracts enabling decentralized applications. Consensus mechanisms include Proof of Work and Proof of Stake.

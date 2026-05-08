@@ -1,0 +1,1 @@
+Databases store and manage structured data. SQL databases like PostgreSQL, MySQL, and Oracle use relational models. NoSQL databases like MongoDB, Cassandra, and Redis handle unstructured data. NewSQL databases combine SQL reliability with NoSQL scalability. Database sharding distributes data across multiple servers.

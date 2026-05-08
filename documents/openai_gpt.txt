@@ -1,0 +1,1 @@
+GPT-4 is a large language model created by OpenAI. It demonstrates human-level performance on various benchmarks. OpenAI was founded in 2015 by Sam Altman, Elon Musk, and others. ChatGPT, powered by GPT models, reached 100 million users within two months of launch.

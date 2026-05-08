@@ -1,0 +1,1 @@
+5G is the fifth generation of mobile network technology offering speeds up to 20 Gbps. It enables ultra-low latency of 1 millisecond. 5G supports massive IoT deployments and autonomous vehicles. Key technologies include millimeter waves, small cells, and beamforming. Major providers include Qualcomm, Ericsson, and Nokia.

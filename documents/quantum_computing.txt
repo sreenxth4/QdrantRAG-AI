@@ -1,0 +1,1 @@
+Quantum computing uses quantum bits (qubits) that can exist in superposition. Google achieved quantum supremacy in 2019 with its Sycamore processor. IBM, Microsoft, and IonQ are major quantum computing companies. Quantum computers could revolutionize cryptography, drug discovery, and optimization problems.

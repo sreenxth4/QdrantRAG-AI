@@ -1,0 +1,1 @@
+DevOps combines software development and IT operations to shorten development cycles. CI/CD pipelines automate building, testing, and deploying code. Docker containers package applications with dependencies. Kubernetes orchestrates container deployment at scale. Popular tools include Jenkins, GitLab CI, and GitHub Actions.

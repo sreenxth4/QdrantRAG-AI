@@ -1,0 +1,1 @@
+Satellites orbit Earth for communication, navigation, weather monitoring, and scientific research. GPS consists of 31 satellites providing global positioning. Starlink by SpaceX aims to provide global internet with thousands of satellites. Geostationary satellites orbit at 35,786 km altitude.

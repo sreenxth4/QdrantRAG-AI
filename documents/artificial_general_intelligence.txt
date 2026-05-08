@@ -1,0 +1,1 @@
+Artificial General Intelligence (AGI) refers to AI systems that match or exceed human intelligence across all cognitive tasks. Current AI systems are narrow AI, excelling at specific tasks. Leading AGI research organizations include OpenAI, Google DeepMind, and Anthropic. AGI development raises significant safety and alignment concerns.
