@@ -2,6 +2,7 @@
 import os
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_core.documents import Document
+from utils.roles import get_role_for_document
 
 
 def load_single_file(filepath: str) -> list[Document]:
@@ -23,7 +24,7 @@ def load_single_file(filepath: str) -> list[Document]:
 
 
 def load_all_documents(directory: str) -> list[Document]:
-    """Load all supported documents from a directory."""
+    """Load all supported documents from a directory and inject role metadata."""
     all_docs = []
     if not os.path.exists(directory):
         print(f"Directory not found: {directory}")
@@ -37,7 +38,12 @@ def load_all_documents(directory: str) -> list[Document]:
         if os.path.isfile(filepath):
             docs = load_single_file(filepath)
             if docs:
-                print(f"  Loaded: {filename} ({len(docs)} page(s))")
+                # Inject role metadata into each document
+                role = get_role_for_document(filename)
+                for doc in docs:
+                    doc.metadata["role"] = role
+                    doc.metadata["filename"] = filename
+                print(f"  Loaded: {filename} ({len(docs)} page(s)) -> role: {role}")
                 all_docs.extend(docs)
 
     print(f"\nTotal documents loaded: {len(all_docs)}")

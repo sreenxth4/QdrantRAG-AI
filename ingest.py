@@ -52,14 +52,30 @@ def ingest(docs_dir: str = DOCUMENTS_DIR) -> dict:
         embedding=embeddings,
     )
 
-    # Add documents in batches to avoid rate limits
-    batch_size = 20
+    # Add documents in small batches with rate limit protection
+    batch_size = 5   # smaller batch → fewer embed calls per minute
+    total_batches = (len(chunks) - 1) // batch_size + 1
     for i in range(0, len(chunks), batch_size):
         batch = chunks[i:i + batch_size]
-        vector_store.add_documents(batch)
-        print(f"  Stored batch {i // batch_size + 1}/{(len(chunks) - 1) // batch_size + 1} ({len(batch)} chunks)")
+        batch_num = i // batch_size + 1
+
+        # Retry on quota errors
+        for attempt in range(3):
+            try:
+                vector_store.add_documents(batch)
+                print(f"  Stored batch {batch_num}/{total_batches} ({len(batch)} chunks)")
+                break
+            except Exception as e:
+                if "RESOURCE_EXHAUSTED" in str(e) or "429" in str(e):
+                    wait = 65
+                    print(f"  Rate limit hit on batch {batch_num}, waiting {wait}s...")
+                    time.sleep(wait)
+                else:
+                    raise
+
+        # Always sleep between batches to avoid hitting 100 req/min limit
         if i + batch_size < len(chunks):
-            time.sleep(1)  # Rate limit protection
+            time.sleep(2)
 
     embed_time = time.time() - start
     print(f"  Time: {embed_time:.1f}s")

@@ -1,10 +1,45 @@
-/* RAG Chatbot Frontend Logic */
+/* RAG Chatbot Frontend Logic with Role-Based Access */
 
 const chatArea = document.getElementById('chatArea');
 const userInput = document.getElementById('userInput');
 const btnSend = document.getElementById('btnSend');
 const btnReindex = document.getElementById('btnReindex');
 const welcomeMsg = document.getElementById('welcomeMsg');
+const roleSelect = document.getElementById('roleSelect');
+const roleDocInfo = document.getElementById('roleDocInfo');
+
+let rolesData = [];
+
+// === Load Roles on Page Load ===
+async function loadRoles() {
+    try {
+        const res = await fetch('/api/roles');
+        rolesData = await res.json();
+        rolesData.forEach(role => {
+            const opt = document.createElement('option');
+            opt.value = role.id;
+            opt.textContent = `${role.title} — ${role.description.split('—')[1]?.trim() || ''}`;
+            roleSelect.appendChild(opt);
+        });
+    } catch (e) {
+        console.error('Failed to load roles:', e);
+    }
+}
+
+// === Update role doc info ===
+roleSelect.addEventListener('change', () => {
+    const val = roleSelect.value;
+    if (val === 'all') {
+        roleDocInfo.textContent = 'Access: All 100 documents';
+        roleDocInfo.style.color = '';
+    } else {
+        const role = rolesData.find(r => r.id === val);
+        if (role) {
+            roleDocInfo.textContent = `Access: ${role.doc_count} documents for ${role.title}`;
+            roleDocInfo.style.color = '#9b85ff';
+        }
+    }
+});
 
 // === Load Stats on Page Load ===
 async function loadStats() {
@@ -13,6 +48,7 @@ async function loadStats() {
         const data = await res.json();
         document.getElementById('docCount').textContent = data.documents_in_folder ?? '—';
         document.getElementById('vecCount').textContent = data.vectors_count ?? '—';
+        document.getElementById('roleCount').textContent = data.roles_count ?? '—';
         const status = document.getElementById('dbStatus');
         if (data.error) {
             status.textContent = 'offline';
@@ -27,6 +63,7 @@ async function loadStats() {
     }
 }
 
+loadRoles();
 loadStats();
 
 // === Send Message ===
@@ -34,32 +71,30 @@ async function sendMessage() {
     const question = userInput.value.trim();
     if (!question) return;
 
-    // Hide welcome
     if (welcomeMsg) welcomeMsg.remove();
 
-    // Add user message
-    addMessage(question, 'user');
+    const role = roleSelect.value;
+    const roleLabel = role === 'all' ? '' : ` [${roleSelect.options[roleSelect.selectedIndex].textContent.split('—')[0].trim()}]`;
+    addMessage(question + roleLabel, 'user');
     userInput.value = '';
     autoResize();
     btnSend.disabled = true;
 
-    // Add typing indicator
     const typingEl = addTypingIndicator();
 
     try {
         const res = await fetch('/api/query', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question }),
+            body: JSON.stringify({ question, role }),
         });
         const data = await res.json();
-
         typingEl.remove();
 
         if (data.error) {
             addMessage('Error: ' + data.error, 'ai');
         } else {
-            addMessage(data.answer, 'ai', data.sources, data.chunks_used);
+            addMessage(data.answer, 'ai', data.sources, data.chunks_used, data.role);
         }
     } catch (err) {
         typingEl.remove();
@@ -71,13 +106,13 @@ async function sendMessage() {
 }
 
 // === Add Message to Chat ===
-function addMessage(text, role, sources = [], chunksUsed = 0) {
+function addMessage(text, msgRole, sources = [], chunksUsed = 0, accessRole = '') {
     const msg = document.createElement('div');
-    msg.className = `message ${role}`;
+    msg.className = `message ${msgRole}`;
 
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    avatar.textContent = role === 'user' ? 'U' : 'AI';
+    avatar.textContent = msgRole === 'user' ? 'U' : 'AI';
 
     const content = document.createElement('div');
     content.className = 'message-content';
@@ -87,11 +122,19 @@ function addMessage(text, role, sources = [], chunksUsed = 0) {
     textEl.textContent = text;
     content.appendChild(textEl);
 
-    // Add sources for AI messages
-    if (role === 'ai' && sources.length > 0) {
+    if (msgRole === 'ai' && sources.length > 0) {
         const srcDiv = document.createElement('div');
         srcDiv.className = 'sources-list';
-        srcDiv.innerHTML = `<div class="sources-title">📄 Source Documents</div>`;
+
+        // Show role badge
+        if (accessRole && accessRole !== 'all') {
+            const roleBadge = document.createElement('div');
+            roleBadge.className = 'role-badge-inline';
+            roleBadge.textContent = `🔒 Role: ${accessRole.toUpperCase().replace('_', ' ')}`;
+            srcDiv.appendChild(roleBadge);
+        }
+
+        srcDiv.innerHTML += `<div class="sources-title">📄 Source Documents</div>`;
         sources.forEach(src => {
             const tag = document.createElement('span');
             tag.className = 'source-tag';
@@ -139,13 +182,12 @@ btnReindex.addEventListener('click', async () => {
     btnReindex.disabled = true;
     btnReindex.classList.add('loading');
 
-    // Show overlay
     const overlay = document.createElement('div');
     overlay.className = 'reindex-overlay';
     overlay.innerHTML = `
         <div class="reindex-modal">
             <h3>🔄 Reindexing Documents</h3>
-            <p>Loading, chunking, embedding, and storing all documents in Qdrant Cloud...</p>
+            <p>Loading, chunking, embedding with role metadata, and storing in Qdrant Cloud...</p>
             <div class="reindex-progress"><div class="reindex-progress-bar"></div></div>
         </div>
     `;
@@ -179,7 +221,6 @@ function autoResize() {
 
 userInput.addEventListener('input', autoResize);
 
-// === Key Events ===
 userInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -189,7 +230,6 @@ userInput.addEventListener('keydown', (e) => {
 
 btnSend.addEventListener('click', sendMessage);
 
-// === Sample Questions ===
 function askSample(btn) {
     userInput.value = btn.textContent;
     autoResize();

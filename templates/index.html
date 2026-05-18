@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RAG Chatbot powered by Qdrant and Google Gemini - Ask questions about uploaded documents">
-    <title>RAG Chatbot | Qdrant + Gemini</title>
+    <meta name="description" content="RAG Chatbot with Role-Based Access Control powered by Qdrant and Google Gemini">
+    <title>RAG Chatbot | Qdrant + Gemini | RBAC</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <!-- Animated background orbs -->
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -29,19 +28,24 @@
                 </div>
                 <div>
                     <h1>RAG Chatbot</h1>
-                    <p class="subtitle">Powered by Qdrant Cloud + Google Gemini</p>
+                    <p class="subtitle">Qdrant Cloud + Gemini • Role-Based Access</p>
                 </div>
             </div>
             <div class="header-right">
                 <div class="stats-panel" id="statsPanel">
                     <div class="stat-item">
-                        <span class="stat-label">Documents</span>
+                        <span class="stat-label">Docs</span>
                         <span class="stat-value" id="docCount">—</span>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
                         <span class="stat-label">Vectors</span>
                         <span class="stat-value" id="vecCount">—</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-label">Roles</span>
+                        <span class="stat-value" id="roleCount">—</span>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
@@ -60,6 +64,21 @@
             </div>
         </header>
 
+        <!-- Role Selector Bar -->
+        <div class="role-bar">
+            <div class="role-bar-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span class="role-bar-label">Active Role:</span>
+            </div>
+            <select id="roleSelect" class="role-select">
+                <option value="all">All Roles (No Filter)</option>
+            </select>
+            <div class="role-doc-count" id="roleDocInfo">Access: All 100 documents</div>
+        </div>
+
         <!-- Chat area -->
         <main class="chat-area" id="chatArea">
             <div class="welcome-message" id="welcomeMsg">
@@ -70,8 +89,8 @@
                         <line x1="12" y1="17" x2="12.01" y2="17"></line>
                     </svg>
                 </div>
-                <h2>Ask me anything about the documents</h2>
-                <p>I have access to 100 documents covering AI, technology, science, history, and more. Ask a question and I'll find relevant information.</p>
+                <h2>Role-Based RAG Chatbot</h2>
+                <p>Select a role above to filter access. Each role can only search its 10 assigned documents. Ask a question and I'll retrieve answers from your authorized documents only.</p>
                 <div class="sample-questions">
                     <button class="sample-q" onclick="askSample(this)">Which company created the AI model that processes text and images?</button>
                     <button class="sample-q" onclick="askSample(this)">What technology replaced RNNs in language processing?</button>
@@ -83,7 +102,7 @@
         <!-- Input area -->
         <footer class="input-area">
             <div class="input-wrapper">
-                <textarea id="userInput" placeholder="Ask a question about the documents..." rows="1" autofocus></textarea>
+                <textarea id="userInput" placeholder="Ask a question (filtered by your role)..." rows="1" autofocus></textarea>
                 <button class="btn-send" id="btnSend" title="Send question">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -91,7 +110,7 @@
                     </svg>
                 </button>
             </div>
-            <p class="input-hint">RAG retrieves relevant document chunks and generates answers using Gemini</p>
+            <p class="input-hint">Retrieval is filtered by role — only your assigned documents are searched</p>
         </footer>
     </div>
 

@@ -188,6 +188,79 @@ html, body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* === Role Selector Bar === */
+.role-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-top: 14px;
+    flex-shrink: 0;
+    backdrop-filter: blur(12px);
+    flex-wrap: wrap;
+}
+
+.role-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+}
+
+.role-bar-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.role-select {
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font);
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b8b9e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+.role-select:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.role-select option {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.role-doc-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.role-badge-inline {
+    font-size: 0.72rem;
+    color: var(--accent-light);
+    background: rgba(124, 96, 255, 0.12);
+    border: 1px solid rgba(124, 96, 255, 0.25);
+    border-radius: 6px;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
 /* === Chat Area === */
 .chat-area {
     flex: 1;

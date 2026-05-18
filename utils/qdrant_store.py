@@ -2,7 +2,7 @@
 import os
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
+from qdrant_client.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue, PayloadSchemaType
 from langchain_qdrant import QdrantVectorStore
 from utils.embeddings import get_embedding_model
 
@@ -22,7 +22,7 @@ def get_qdrant_client() -> QdrantClient:
 
 
 def create_collection(client: QdrantClient):
-    """Create or recreate the vector collection."""
+    """Create or recreate the vector collection with role payload index."""
     collections = [c.name for c in client.get_collections().collections]
     if COLLECTION_NAME in collections:
         print(f"Deleting existing collection: {COLLECTION_NAME}")
@@ -35,11 +35,18 @@ def create_collection(client: QdrantClient):
             distance=Distance.COSINE,
         ),
     )
-    print(f"Created collection: {COLLECTION_NAME}")
+
+    # Create payload index on 'role' field for fast filtering
+    client.create_payload_index(
+        collection_name=COLLECTION_NAME,
+        field_name="metadata.role",
+        field_schema=PayloadSchemaType.KEYWORD,
+    )
+    print(f"Created collection: {COLLECTION_NAME} (with role index)")
 
 
-def get_vector_store() -> QdrantVectorStore:
-    """Get LangChain QdrantVectorStore for retrieval."""
+def get_vector_store(role: str = None) -> QdrantVectorStore:
+    """Get LangChain QdrantVectorStore, optionally filtered by role."""
     url = os.getenv("QDRANT_URL")
     api_key = os.getenv("QDRANT_API_KEY")
     embeddings = get_embedding_model()
@@ -49,6 +56,18 @@ def get_vector_store() -> QdrantVectorStore:
         api_key=api_key,
         collection_name=COLLECTION_NAME,
         embedding=embeddings,
+    )
+
+
+def build_role_filter(role: str) -> Filter:
+    """Build a Qdrant filter for a specific role."""
+    return Filter(
+        must=[
+            FieldCondition(
+                key="metadata.role",
+                match=MatchValue(value=role),
+            )
+        ]
     )
 
 
